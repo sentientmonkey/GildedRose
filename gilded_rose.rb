@@ -35,15 +35,15 @@ class GildedRose
   def update_quality
     items.each do |item|
       if !brie?(item) && !backstage_pass?(item)
-        decreases_quality(item)
+        decreases_quality(item, 1)
       else
-        increase_quality(item)
+        increase_quality(item, 1)
         if backstage_pass?(item)
           if item.sell_in < 11
-            increase_quality(item)
+            increase_quality(item, 1)
           end
           if item.sell_in < 6
-            increase_quality(item)
+            increase_quality(item, 1)
           end
         end
       end
@@ -53,12 +53,12 @@ class GildedRose
       if item.sell_in < 0
         if !brie?(item)
           if !backstage_pass?(item)
-            decreases_quality(item)
+            decreases_quality(item, 1)
           else
-            item.quality = item.quality - item.quality
+            decreases_quality(item, item.quality)
           end
         else
-          increase_quality(item)
+          increase_quality(item, 1)
         end
       end
     end
@@ -70,16 +70,16 @@ class GildedRose
     end
   end
 
-  def increase_quality(item)
+  def increase_quality(item, amount)
     if item.quality < 50
-      item.quality = item.quality + 1
+      item.quality = item.quality + amount
     end
   end
 
-  def decreases_quality(item)
+  def decreases_quality(item, amount)
     if item.quality > 0
       if !sulfuras?(item)
-        item.quality = item.quality - 1
+        item.quality = item.quality - amount
       end
     end
   end
