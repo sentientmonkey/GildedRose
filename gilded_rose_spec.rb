@@ -28,6 +28,14 @@ describe GildedRose do
     subject.find "Conjured Mana Cake"
   end
 
+  def new_item_name
+    "Nachos of Awesome"
+  end
+
+  def new_item
+    Item.new(new_item_name, 5, 10)
+  end
+
   it "should start with 6 items" do
     subject.items.size.must_equal 6
   end
@@ -124,5 +132,12 @@ describe GildedRose do
     end
     subject.update_quality
     conjured_item.quality.must_equal 0
+  end
+
+  it "can add a new item" do
+    subject.add new_item
+    result = subject.find new_item_name
+    result.wont_be_nil
+    result.name.must_equal new_item_name
   end
 end

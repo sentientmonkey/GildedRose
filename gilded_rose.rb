@@ -20,6 +20,10 @@ class GildedRose
     items.detect{ |item| item.name == name }
   end
 
+  def add(item)
+    items << item
+  end
+
   def brie?(item)
     item.name == "Aged Brie"
   end
