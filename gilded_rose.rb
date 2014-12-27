@@ -57,9 +57,9 @@ class GildedRose
           end
         end
       end
-      if !sulfuras?(item)
-        item.sell_in = item.sell_in - 1;
-      end
+
+      update_sell_in(item)
+
       if item.sell_in < 0
         if !brie?(item)
           if !backstage_pass?(item)
@@ -77,6 +77,12 @@ class GildedRose
           end
         end
       end
+    end
+  end
+
+  def update_sell_in(item)
+    unless sulfuras? item
+      item.sell_in = item.sell_in - 1;
     end
   end
 
