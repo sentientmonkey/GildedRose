@@ -32,6 +32,10 @@ class GildedRose
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 
+  def passed_sell_in?(item)
+    item.sell_in < 0
+  end
+
   def update_quality
     items.each do |item|
       next if sulfuras?(item)
@@ -52,7 +56,7 @@ class GildedRose
         decreases_quality(item, 1)
       end
 
-      if item.sell_in < 0
+      if passed_sell_in?(item)
         if brie?(item)
           increase_quality(item, 1)
         elsif backstage_pass?(item)
