@@ -32,8 +32,14 @@ describe GildedRose do
     "Nachos of Awesome"
   end
 
-  def new_item
-    Item.new(new_item_name, 5, 10)
+  let(:new_item) do
+    Item.new new_item_name, 5, 10
+  end
+
+  let(:new_conjured_item) do
+    item = Item.new "Conjured Lava Cake", 5, 40
+    subject.add item
+    item
   end
 
   it "should start with 6 items" do
@@ -139,5 +145,16 @@ describe GildedRose do
     result = subject.find new_item_name
     result.wont_be_nil
     result.name.must_equal new_item_name
+  end
+
+  it "a new conjured item decays twice as fast" do
+    quality = new_conjured_item.quality
+    5.times do
+      subject.update_quality
+      quality -= 2
+      new_conjured_item.quality.must_equal quality
+    end
+    subject.update_quality
+    new_conjured_item.quality.must_equal quality-4
   end
 end

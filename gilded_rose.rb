@@ -71,7 +71,11 @@ class GildedRose
   end
 
   def update_conjured_quality(item)
-    decreases_quality(item, 2)
+    if passed_sell_in?(item)
+      decreases_quality(item, 4)
+    else
+      decreases_quality(item, 2)
+    end
   end
 
   def update_backstage_quality(item)
