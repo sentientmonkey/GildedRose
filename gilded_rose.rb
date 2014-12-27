@@ -34,31 +34,29 @@ class GildedRose
 
   def update_quality
     items.each do |item|
-      if !brie?(item) && !backstage_pass?(item)
-        decreases_quality(item, 1)
-      else
+      if brie?(item)
         increase_quality(item, 1)
-        if backstage_pass?(item)
-          if item.sell_in < 11
-            increase_quality(item, 1)
-          end
-          if item.sell_in < 6
-            increase_quality(item, 1)
-          end
+      elsif backstage_pass?(item)
+        increase_quality(item, 1)
+        if item.sell_in < 11
+          increase_quality(item, 1)
         end
+        if item.sell_in < 6
+          increase_quality(item, 1)
+        end
+      else
+        decreases_quality(item, 1)
       end
 
       update_sell_in(item)
 
       if item.sell_in < 0
-        if !brie?(item)
-          if !backstage_pass?(item)
-            decreases_quality(item, 1)
-          else
-            decreases_quality(item, item.quality)
-          end
-        else
+        if brie?(item)
           increase_quality(item, 1)
+        elsif backstage_pass?(item)
+          decreases_quality(item, item.quality)
+        else
+          decreases_quality(item, 1)
         end
       end
     end
