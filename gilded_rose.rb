@@ -53,28 +53,31 @@ class GildedRose
   end
 
   def update_brie_quality(item)
-    increase_quality(item, 1)
     if passed_sell_in?(item)
+      increase_quality(item, 2)
+    else
       increase_quality(item, 1)
     end
   end
 
   def update_backstage_quality(item)
-    increase_quality(item, 1)
-    if item.sell_in < 10
-      increase_quality(item, 1)
-    end
-    if item.sell_in < 5
-      increase_quality(item, 1)
-    end
     if passed_sell_in?(item)
       decreases_quality(item, item.quality)
+    else
+      if item.sell_in < 5
+        increase_quality(item, 3)
+      elsif item.sell_in < 10
+        increase_quality(item, 2)
+      else
+        increase_quality(item, 1)
+      end
     end
   end
 
   def update_default_quality(item)
-    decreases_quality(item, 1)
     if passed_sell_in?(item)
+      decreases_quality(item, 2)
+    else
       decreases_quality(item, 1)
     end
   end
