@@ -2,6 +2,8 @@ require './item.rb'
 
 class GildedRose
 
+  attr_reader :items
+
   @items = []
 
   def initialize
@@ -14,8 +16,11 @@ class GildedRose
     @items << Item.new("Conjured Mana Cake", 3, 6)
   end
 
-  def update_quality
+  def find(name)
+    items.detect{ |item| item.name == name }
+  end
 
+  def update_quality
     for i in 0..(@items.size-1)
       if (@items[i].name != "Aged Brie" && @items[i].name != "Backstage passes to a TAFKAL80ETC concert")
         if (@items[i].quality > 0)
