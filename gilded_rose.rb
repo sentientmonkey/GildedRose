@@ -34,6 +34,8 @@ class GildedRose
 
   def update_quality
     items.each do |item|
+      next if sulfuras?(item)
+
       update_sell_in(item)
 
       if brie?(item)
@@ -63,9 +65,7 @@ class GildedRose
   end
 
   def update_sell_in(item)
-    unless sulfuras? item
-      item.sell_in = item.sell_in - 1;
-    end
+    item.sell_in = item.sell_in - 1;
   end
 
   def increase_quality(item, amount)
@@ -76,9 +76,7 @@ class GildedRose
 
   def decreases_quality(item, amount)
     if item.quality > 0
-      if !sulfuras?(item)
-        item.quality = item.quality - amount
-      end
+      item.quality = item.quality - amount
     end
   end
 end
