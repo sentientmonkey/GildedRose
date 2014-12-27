@@ -24,6 +24,10 @@ describe GildedRose do
     subject.find "Backstage passes to a TAFKAL80ETC concert"
   end
 
+  def conjured_item
+    subject.find "Conjured Mana Cake"
+  end
+
   it "should start with 6 items" do
     subject.items.size.must_equal 6
   end
@@ -111,4 +115,14 @@ describe GildedRose do
     backstage_passes.quality.must_equal 0
   end
 
+  it "conjured items decay twice as fast" do
+    quality = conjured_item.quality
+    3.times do
+      subject.update_quality
+      quality -= 2
+      conjured_item.quality.must_equal quality
+    end
+    subject.update_quality
+    conjured_item.quality.must_equal 0
+  end
 end

@@ -32,6 +32,10 @@ class GildedRose
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 
+  def conjured?(item)
+    item.name =~ /Conjured/
+  end
+
   def passed_sell_in?(item)
     item.sell_in < 0
   end
@@ -46,6 +50,8 @@ class GildedRose
         update_brie_quality(item)
       elsif backstage_pass?(item)
         update_backstage_quality(item)
+      elsif conjured?(item)
+        update_conjured_quality(item)
       else
         update_default_quality(item)
       end
@@ -58,6 +64,10 @@ class GildedRose
     else
       increase_quality(item, 1)
     end
+  end
+
+  def update_conjured_quality(item)
+    decreases_quality(item, 2)
   end
 
   def update_backstage_quality(item)
