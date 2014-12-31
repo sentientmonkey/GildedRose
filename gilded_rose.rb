@@ -27,8 +27,8 @@ class GildedRose
 
   def update_quality
     items.each do |item|
-      quality_updater = QualityUpdater.new
-      quality_updater.update_quality item
+      quality_updater = QualityUpdater.new item
+      quality_updater.update_quality
     end
   end
 end

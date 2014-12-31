@@ -1,91 +1,97 @@
 require './item.rb'
 
 class QualityUpdater
-  def brie?(item)
+  attr_reader :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def brie?
     item.name == "Aged Brie"
   end
 
-  def backstage_pass?(item)
+  def backstage_pass?
     item.name == "Backstage passes to a TAFKAL80ETC concert"
   end
 
-  def sulfuras?(item)
+  def sulfuras?
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 
-  def conjured?(item)
+  def conjured?
     item.name =~ /Conjured/
   end
 
-  def passed_sell_in?(item)
+  def passed_sell_in?
     item.sell_in < 0
   end
 
-  def update_quality(item)
-    return if sulfuras?(item)
+  def update_quality
+    return if sulfuras?
 
-    update_sell_in(item)
+    update_sell_in
 
-    if brie?(item)
-      update_brie_quality(item)
-    elsif backstage_pass?(item)
-      update_backstage_quality(item)
-    elsif conjured?(item)
-      update_conjured_quality(item)
+    if brie?
+      update_brie_quality
+    elsif backstage_pass?
+      update_backstage_quality
+    elsif conjured?
+      update_conjured_quality
     else
-      update_default_quality(item)
+      update_default_quality
     end
   end
 
-  def update_brie_quality(item)
-    if passed_sell_in?(item)
-      increase_quality(item, 2)
+  def update_brie_quality
+    if passed_sell_in?
+      increase_quality 2
     else
-      increase_quality(item, 1)
+      increase_quality 1
     end
   end
 
-  def update_conjured_quality(item)
-    if passed_sell_in?(item)
-      decreases_quality(item, 4)
+  def update_conjured_quality
+    if passed_sell_in?
+      decreases_quality 4
     else
-      decreases_quality(item, 2)
+      decreases_quality 2
     end
   end
 
-  def update_backstage_quality(item)
-    if passed_sell_in?(item)
-      decreases_quality(item, item.quality)
+  def update_backstage_quality
+    if passed_sell_in?
+      decreases_quality item.quality
     else
       if item.sell_in < 5
-        increase_quality(item, 3)
+        increase_quality 3
       elsif item.sell_in < 10
-        increase_quality(item, 2)
+        increase_quality 2
       else
-        increase_quality(item, 1)
+        increase_quality 1
       end
     end
   end
 
-  def update_default_quality(item)
-    if passed_sell_in?(item)
-      decreases_quality(item, 2)
+  def update_default_quality
+    if passed_sell_in?
+      decreases_quality 2
     else
-      decreases_quality(item, 1)
+      decreases_quality 1
     end
   end
 
-  def update_sell_in(item)
+  def update_sell_in
     item.sell_in = item.sell_in - 1;
   end
 
-  def increase_quality(item, amount)
+  def increase_quality amount
     if item.quality < 50
       item.quality = item.quality + amount
     end
   end
 
-  def decreases_quality(item, amount)
+  def decreases_quality amount
     if item.quality > 0
       item.quality = item.quality - amount
     end
