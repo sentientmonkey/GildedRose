@@ -1,6 +1,4 @@
-require './conjured_item_updater.rb'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './spec_helper.rb'
 
 describe ConjuredItemUpdater do
   let(:conjured_item) do

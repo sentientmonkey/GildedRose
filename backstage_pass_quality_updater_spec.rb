@@ -1,6 +1,5 @@
 require './backstage_pass_quality_updater.rb'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './spec_helper.rb'
 
 describe BackstagePassQualityUpdater do
   let(:backstage_passes) do

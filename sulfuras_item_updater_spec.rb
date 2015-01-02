@@ -1,12 +1,6 @@
-require './sulfuras_quality_updater.rb'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './spec_helper.rb'
 
 describe SulfurasQualityUpdater do
-  let(:sulfuras) do
-    Item.new "Sulfuras, Hand of Ragnaros", 0, 80
-  end
-
   let(:sulfuras_updater) do
     SulfurasQualityUpdater.new sulfuras
   end

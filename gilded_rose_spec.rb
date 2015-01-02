@@ -1,6 +1,4 @@
-require './gilded_rose.rb'
-require "minitest/autorun"
-require "minitest/pride"
+require './spec_helper.rb'
 
 describe GildedRose do
 

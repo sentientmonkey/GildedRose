@@ -1,0 +1,8 @@
+require './gilded_rose.rb'
+require './quality_updater.rb'
+require './brie_quality_updater.rb'
+require './conjured_item_updater.rb'
+require './item_quality_updater.rb'
+require './sulfuras_quality_updater.rb'
+require 'minitest/autorun'
+require 'minitest/pride'

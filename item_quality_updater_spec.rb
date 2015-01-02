@@ -1,6 +1,4 @@
-require './item_quality_updater.rb'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './spec_helper.rb'
 
 describe ItemQualityUpdater do
 
