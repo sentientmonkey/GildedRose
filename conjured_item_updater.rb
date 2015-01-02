@@ -1,6 +1,6 @@
-require './quality_updater.rb'
+require './item_quality_updater.rb'
 
-class ConjuredItemUpdater < QualityUpdater
+class ConjuredItemUpdater < ItemQualityUpdater
   def update_quality
     update_sell_in
 

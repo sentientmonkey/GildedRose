@@ -1,6 +1,6 @@
-require './quality_updater.rb'
+require './item_quality_updater.rb'
 
-class SulfurasQualityUpdater < QualityUpdater
+class SulfurasQualityUpdater < ItemQualityUpdater
   def update_quality
     # never changes
   end

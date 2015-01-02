@@ -1,11 +1,11 @@
-require './quality_updater.rb'
+require './item_quality_updater.rb'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-describe QualityUpdater do
+describe ItemQualityUpdater do
 
-  let(:subject) do
-    QualityUpdater
+  let(:quality_updater) do
+    ItemQualityUpdater
   end
 
   let(:default_item) do
@@ -13,7 +13,7 @@ describe QualityUpdater do
   end
 
   let(:default_item_updater) do
-    subject.new default_item
+    quality_updater.new default_item
   end
 
   it "should update default quality" do
